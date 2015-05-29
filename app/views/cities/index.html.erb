@@ -1,0 +1,53 @@
+<% form_tag cities_path, :method => 'get' do %>
+  <%= text_field_tag :q, params[:q] %>
+  <%= submit_tag "Locate city", :name => nil %>
+<% end %>
+
+<% content_for :head do %>
+<%= javascript_include_tag 'jquery-1.2.6.min', 'jquery.ui-1.6rc2/ui/minified/ui.core.min', 'jquery.ui-1.6rc2/ui/minified/ui.autocomplete.min' %>
+<%= stylesheet_link_tag 'jquery.ui-1.6rc2/themes/default/ui.all' %>
+
+<script type="text/javascript">
+$(document).ready(function(){
+jQuery.ajaxSetup({
+'beforeSend': function(xhr) {xhr.setRequestHeader("Accept", "text/javascript")}
+})
+$("#q").autocomplete( {
+url : '<%= formatted_cities_path(:js) %>',
+mustMatch : false
+}
+);
+$("#q").autocomplete('result', function(event, data, formatted) {
+if (data)
+document.location.href = '/cities/' + data[1];
+});
+});
+</script>
+<% end%>
+
+
+<!--<h1>Listing cities</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @cities.each do |city| %>
+      <tr>
+        <td><%= city.name %></td>
+        <td><%= link_to 'Show', city %></td>
+        <td><%= link_to 'Edit', edit_city_path(city) %></td>
+        <td><%= link_to 'Destroy', city, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New City', new_city_path %>-->
