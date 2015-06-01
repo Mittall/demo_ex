@@ -10,4 +10,8 @@ class ApplicationController < ActionController::Base
   def get_info
   	return false
   end
+<<<<<<< HEAD
+=======
+  
+>>>>>>> test1
 end
