@@ -6,4 +6,8 @@ class ApplicationController < ActionController::Base
   def get_data
   	return true
   end
+
+  def get_info
+  	return false
+  end
 end
